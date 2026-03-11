@@ -42,8 +42,7 @@ def resultado():
         # Verificar el código de estado HTTP antes de procesar
         if response.status_code == 200:
             data = response.json()
-            
-            # Mapeo de datos solicitados
+            # ... mapeo de datos ...
             clima = {
                 "ciudad": data["name"],
                 "pais": data["sys"]["country"].lower(),
@@ -57,19 +56,22 @@ def resultado():
                 "visibilidad": data.get("visibility", 0) / 1000,   # m a km
                 "nubes": data["clouds"]["all"],
                 "icono": data["weather"][0]["icon"],
-                "icono_base": data["weather"][0]["icon"][:2], # Código base (01, 02, etc.)
+                "icono_base": data["weather"][0]["icon"][:2],
                 "descripcion": data["weather"][0]["description"],
                 "clima_principal": data["weather"][0]["main"].lower()
             }
-            
             return render_template("resultado.html", clima=clima)
+        
+        elif response.status_code == 401:
+            return render_template("error.html", mensaje="Error de autenticación: La API Key no es válida o no se ha configurado en Vercel.")
+        elif response.status_code == 404:
+            return render_template("error.html", mensaje=f"No pudimos encontrar la ciudad '{ciudad}'. Revisa que esté bien escrita.")
         else:
-            # Si la ciudad no existe o hay error de API
-            return render_template("error.html", mensaje="No pudimos encontrar la ciudad solicitada.")
+            return render_template("error.html", mensaje=f"Error inesperado de la API (Código: {response.status_code}).")
             
     except Exception as e:
         print(f"Error consultando la API: {e}")
-        return render_template("error.html", mensaje="Ocurrió un error inesperado al consultar el clima.")
+        return render_template("error.html", mensaje=f"Ocurrió un error técnico: {str(e)}")
 
 if __name__ == "__main__":
     if not API_KEY:
