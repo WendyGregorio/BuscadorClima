@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clima Hoy | Búsqueda</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="glass-card">
+            <h1>Clima Hoy</h1>
+            <p style="margin-bottom: 2rem; opacity: 0.8;">Consulta el clima actual de cualquier ciudad del mundo.</p>
+            
+            <form action="/resultado" method="POST" class="search-form">
+                <input type="text" name="ciudad" placeholder="Ej: Madrid, Buenos Aires, Tokyo..." required autofocus>
+                <button type="submit">Consultar Clima</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

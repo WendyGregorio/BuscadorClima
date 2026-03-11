@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ clima.ciudad }} | Clima</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="weather-{{ clima.clima_principal }} weather-id-{{ clima.icono_base }}">
+    <div class="container">
+        <div class="glass-card">
+            <div class="weather-header">
+                <span class="city-name">{{ clima.ciudad }}/{{ clima.pais | upper }}</span>
+                <img src="https://flagcdn.com/w40/{{ clima.pais }}.png" alt="Bandera" class="flag">
+            </div>
+
+            <img src="https://openweathermap.org/img/wn/{{ clima.icono }}@4x.png" alt="Icono clima" class="weather-icon-img">
+            
+            <div class="main-temp">{{ clima.temp | round }}°C</div>
+            <div class="weather-description">{{ clima.descripcion }}</div>
+
+            <div class="details-grid">
+                <div class="detail-item">
+                    <span class="detail-label">Sensación</span>
+                    <span class="detail-value">{{ clima.sensacion }}°C</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Humedad</span>
+                    <span class="detail-value">{{ clima.humedad }}%</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Viento</span>
+                    <span class="detail-value">{{ clima.viento }} km/h</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Presión</span>
+                    <span class="detail-value">{{ clima.presion }} hPa</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Mín / Máx</span>
+                    <span class="detail-value">{{ clima.min }}° / {{ clima.max }}°</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Visibilidad</span>
+                    <span class="detail-value">{{ clima.visvisibility | round(1) if clima.visvisibility else clima.visibilidad | round(1) }} km</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Nubosidad</span>
+                    <span class="detail-value">{{ clima.nubes }}%</span>
+                </div>
+            </div>
+
+            <a href="/" class="back-btn">← Volver a buscar</a>
+        </div>
+    </div>
+</body>
+</html>

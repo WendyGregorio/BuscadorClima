@@ -1,0 +1,165 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+:root {
+    /* Colores solicitados */
+    --cielo-claro: linear-gradient(135deg, #FF8C00 0%, #FFA500 100%);      /* Naranja */
+    --algo-nubes: linear-gradient(135deg, #E0E4E7 0%, #f5f7f8 100%);       /* Blanco Grisáceo */
+    --nubes-dispersas: linear-gradient(135deg, #f6d365 0%, #fda085 100%);  /* Naranja Amanecer */
+    --nubes: linear-gradient(135deg, #FFFFFF 0%, #F0F2F3 100%);            /* Blanco */
+    
+    /* Otros climas */
+    --lluvia: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);
+    --tormenta: linear-gradient(135deg, #0f0c29 0%, #302b63 100%, #24243e 100%);
+    --nieve: linear-gradient(135deg, #E0EAFC 0%, #CFDEF3 100%);
+    --neblina: linear-gradient(135deg, #606c88 0%, #3f4c6b 100%);
+    --default: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --text-white: #ffffff;
+    --text-dark: #333333;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--default);
+    transition: background 0.5s ease;
+    padding: 20px;
+}
+
+/* --- ASIGNACIÓN DE COLORES POR CÓDIGO DE ICONO --- */
+
+/* 01: Cielo Despejado -> Naranja */
+body.weather-id-01 { background: var(--cielo-claro); color: var(--text-white); }
+
+/* 02: Algo de Nubes -> Blanco Grisáceo */
+body.weather-id-02 { background: var(--algo-nubes); color: var(--text-dark); }
+
+/* 03: Nubes Dispersas -> Naranja Amanecer */
+body.weather-id-03 { background: var(--nubes-dispersas); color: var(--text-dark); }
+
+/* 04: Nubes (Cubierto) -> Blanco */
+body.weather-id-04 { background: var(--nubes); color: var(--text-dark); }
+
+/* 09/10: Lluvia */
+body.weather-id-09, body.weather-id-10 { background: var(--lluvia); color: var(--text-white); }
+
+/* 11: Tormenta */
+body.weather-id-11 { background: var(--tormenta); color: var(--text-white); }
+
+/* 13: Nieve */
+body.weather-id-13 { background: var(--nieve); color: var(--text-dark); }
+
+/* 50: Neblina */
+body.weather-id-50 { background: var(--neblina); color: var(--text-white); }
+
+/* --- DISEÑO DE TARJETA --- */
+.container {
+    width: 100%;
+    max-width: 500px;
+}
+
+.glass-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    font-size: 2.2rem;
+    letter-spacing: -1px;
+}
+
+.search-form { display: flex; flex-direction: column; gap: 1rem; }
+
+input[type="text"] {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    padding: 1rem;
+    color: inherit;
+    font-size: 1.1rem;
+    outline: none;
+}
+
+button {
+    background: #333;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.weather-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.city-name { font-size: 1.8rem; font-weight: 600; }
+
+.flag { width: 30px; border-radius: 4px; }
+
+.main-temp { font-size: 5rem; font-weight: 800; margin: 10px 0; }
+
+.weather-icon-img { width: 100px; }
+
+.weather-description { text-transform: capitalize; font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+
+.details-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    text-align: left;
+}
+
+.detail-item {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 12px;
+    border-radius: 15px;
+}
+
+.detail-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    opacity: 0.7;
+    margin-bottom: 4px;
+}
+
+.detail-value { font-size: 1.1rem; font-weight: 600; }
+
+.back-btn {
+    display: inline-block;
+    margin-top: 2rem;
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+}
